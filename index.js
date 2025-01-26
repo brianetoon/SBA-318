@@ -4,6 +4,9 @@ const recipes = require("./routes/recipes")
 const app = express();
 const port = 3000;
 
+// Middleware
+app.use(express.json()); // Parse JSON bodies
+app.use(express.static("public")); // Serve static files
 
 // Base Routes
 app.get("/", (req, res) => {
@@ -17,7 +20,7 @@ app.get("/about", (req, res) => {
 // API Routes
 app.use("/api/recipes", recipes);
 
-// Listen for requests...
+// Start Server
 app.listen(port, () => {
   console.log(`
     🪐 Welcome to the Galactic Grub API 🪐
