@@ -3,12 +3,14 @@ const router = express.Router();
 const recipes = require("../data/recipes");
 const users = require("../data/users");
 const comments = require("../data/comments");
-const generateId = require("../utilities/generateId");
-const findById = require("../utilities/findById");
-const findIndex = require("../utilities/findIndex");
-const handleError = require("../utilities/handleError");
-const getComments = require("../utilities/getComments");
-const getFormattedComments = require("../utilities/getFormattedComments");
+const {
+  findById,
+  findIndex,
+  generateId,
+  getComments,
+  getFormattedComments,
+  handleError
+} = require("../utilities");
 
 router.route("/")
   // GET all recipes
@@ -18,9 +20,8 @@ router.route("/")
     const recipesWithComments = recipes.map(recipe => {
       const recipeComments = getComments(comments, recipe.id);
       const formattedComments = getFormattedComments(recipeComments, users);
-
       return { ...recipe, comments: formattedComments }
-    })
+    });
 
     res.json({ success: true, data: recipesWithComments});
   })
