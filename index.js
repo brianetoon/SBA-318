@@ -6,8 +6,8 @@ const app = express();
 const port = 3000;
 
 // Middleware
-app.use(express.json()); // Parse JSON bodies
-app.use(express.static("public")); // Serve static files
+app.use(express.json());
+app.use(express.static("public"));
 
 // Base Routes
 app.get("/", (req, res) => {
