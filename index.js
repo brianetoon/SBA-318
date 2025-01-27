@@ -1,5 +1,6 @@
 const express = require("express");
-const recipes = require("./routes/recipes")
+const recipes = require("./routes/recipes");
+const users = require("./routes/users");
 
 const app = express();
 const port = 3000;
@@ -19,6 +20,7 @@ app.get("/about", (req, res) => {
 
 // API Routes
 app.use("/api/recipes", recipes);
+app.use("/api/users", users);
 
 // Start Server
 app.listen(port, () => {
