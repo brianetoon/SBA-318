@@ -5,4 +5,4 @@ function handleError(res, message, statusCode = 404) {
   });
 }
 
-module.exports = handleError;
+export default handleError;

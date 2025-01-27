@@ -1,6 +1,10 @@
-const express = require("express");
-const recipes = require("./routes/recipes");
-const users = require("./routes/users");
+// const express = require("express");
+// const recipes = require("./routes/recipes");
+// const users = require("./routes/users");
+
+import express from "express";
+import recipes from "./routes/recipes.js";
+import users from "./routes/users.js";
 
 const app = express();
 const port = 3000;

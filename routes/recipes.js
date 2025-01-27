@@ -1,16 +1,18 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const recipes = require("../data/recipes");
-const users = require("../data/users");
-const comments = require("../data/comments");
-const {
+
+import recipes from "../data/recipes.js";
+import users from "../data/users.js";
+import comments from "../data/comments.js";
+
+import {
   findById,
   findIndex,
   generateId,
   getComments,
   getFormattedComments,
   handleError
-} = require("../utilities");
+} from "../utilities/index.js";
 
 router.route("/")
   // GET all recipes
@@ -102,4 +104,4 @@ router.route("/:id/comments")
     res.status(201).json({ success: true, data: newComment });
   });
 
-module.exports = router;
+export default router;

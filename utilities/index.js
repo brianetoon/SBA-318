@@ -1,15 +1,15 @@
-const findById = require("./findById");
-const findIndex = require("./findIndex");
-const generateId = require("./generateId");
-const getComments = require("./getComments");
-const getFormattedComments = require("./getFormattedComments");
-const handleError = require("./handleError");
+import findById from "./findById.js";
+import findIndex from "./findIndex.js";
+import generateId from "./generateId.js";
+import getComments from "./getComments.js";
+import getFormattedComments from "./getFormattedComments.js";
+import handleError from "./handleError.js";
 
-module.exports = {
+export {
   findById,
   findIndex,
   generateId,
   getComments,
   getFormattedComments,
   handleError
-}
+};

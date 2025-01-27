@@ -8,4 +8,4 @@ function getFormattedComments(comments, users) {
   });
 }
 
-module.exports = getFormattedComments;
+export default getFormattedComments;

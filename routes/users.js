@@ -1,11 +1,11 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const users = require("../data/users");
-const {
+import users from "../data/users.js";
+import {
   findById,
   generateId,
   handleError
-} = require("../utilities");
+} from "../utilities/index.js";
 
 router.route("/")
   // GET all users
@@ -36,4 +36,4 @@ router.route("/:id")
     res.json({ success: true, data: user });
   });
 
-module.exports = router;
+export default router;
