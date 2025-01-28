@@ -2,6 +2,7 @@ import recipes from "../data/recipes.js";
 import users from "../data/users.js";
 import comments from "../data/comments.js";
 import {
+  filterById,
   findById,
   findIndex,
   generateId,
@@ -13,7 +14,15 @@ export const getAllRecipes = (req, res, next) => {
   console.log(`🚀 ${req.method} request for all recipes`);
 
   try {
-    const recipesWithComments = recipes.map(recipe => {
+    const { userId } = req.query; 
+    let filteredRecipes = recipes;
+
+    if (userId) {
+      console.log(req.query);
+      filteredRecipes = filterById(recipes, parseInt(userId));
+    }
+
+    const recipesWithComments = filteredRecipes.map(recipe => {
       const recipeComments = getComments(comments, recipe.id);
       const formattedComments = getFormattedComments(recipeComments, users);
       return { ...recipe, comments: formattedComments }
