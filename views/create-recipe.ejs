@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create New Recipe</title>
+</head>
+<body>
+  <h2>Create New Recipe</h2>
+
+  <div class="create-recipe">
+
+    <form action="/api/recipes" method="POST">
+      <label for="title">Recipe title:</label>
+      <input type="text" id="title" name="title" required>
+      <label for="ingredients">Recipe ingredients:</label>
+      <input type="text" id="ingredients" name="ingredients" required>
+      <label for="steps">Recipe instructions:</label>
+      <textarea id="steps" name="steps" required></textarea>
+      <button type="submit">Submit</button>
+    </form>
+
+  </div>
+</body>
+</html>

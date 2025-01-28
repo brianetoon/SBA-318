@@ -1,27 +1,25 @@
 import express from "express";
-import recipes from "./routes/recipesRoutes.js";
-import users from "./routes/usersRoutes.js";
+import recipesRoutes from "./routes/recipesRoutes.js";
+import usersRoutes from "./routes/usersRoutes.js";
+import baseRoutes from "./routes/baseRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
 
 const app = express();
 const port = 3000;
 
+app.set("view engine", "ejs");
+
 // Middleware
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
 // Base Routes
-app.get("/", (req, res) => {
-  res.send("Welcome to Galactic Grub!");
-});
+app.use("/", baseRoutes);
 
-app.get("/about", (req, res) => {
-  res.send("This is the about page.");
-});
-
-// API Routes Middleware
-app.use("/api/recipes", recipes);
-app.use("/api/users", users);
+// API Routes
+app.use("/api/recipes", recipesRoutes);
+app.use("/api/users", usersRoutes);
 
 // Error Handler Middleware
 app.use(errorHandler);

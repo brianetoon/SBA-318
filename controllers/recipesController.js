@@ -41,7 +41,8 @@ export const createRecipe = (req, res, next) => {
     const newRecipe = req.body;
     newRecipe.id = generateId();
     recipes.push(newRecipe);
-    res.status(201).json({ success: true, data: newRecipe });
+    // res.status(201).json({ success: true, data: newRecipe });
+    res.redirect("/recipes")
 
   } catch(error) {
     next(error);
