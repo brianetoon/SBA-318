@@ -1,5 +1,9 @@
 # SBA 318 - Express Server Application
 
+## Project Summary
+
+The purpose of this project is to demonstrate understanding of Node and Express by creating a RESTful API, creating and using Express middleware and making use a templte engine to render views with Express. A detailed list of requirements is provided below.
+
 ## Objectives
 
 - Create a server application with Node and Express.
@@ -29,7 +33,8 @@
 - Ensure that the program runs without errors.
 - Include a README file that contains a description of your application.
 
-## Bonus Objectives
+## Application Details
 
-- Include a practical usage of regular expressions within route paths.
-- Research and effectively use at least one third-party Node package for practical, sensible purposes.
+This project that centers around building a RESTful API using Express. The core functionality revolves around creating, retrieving, updating, and deleting recipes, as well as posting and managing comments for each recipe. The API integrates with a mock database and supports various HTTP methods, providing users with a flexible interface to interact with the recipe data.
+
+The project also includes a temporary front-end, created to demonstrate the interaction with the API, but the main focus was on building the Express-based REST API. Features such as validation, error handling middleware, and clean, maintainable routing structure were prioritized. The front-end will evolve, and more advanced user interface features will be implemented later as well as a MongoDB database.
