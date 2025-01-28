@@ -10,12 +10,12 @@ router.get("/", (req, res) => {
 
 // Recipes 
 router.get("/recipes", (req, res) => {
-  res.render("recipes", { recipes });
+  res.render("recipes", { recipes, title: "Recipes" });
 });
 
 // Create Recipe 
 router.get("/recipes/create", (req, res) => {
-  res.render("create-recipe");
+  res.render("create-recipe", { title: "New Recipe" });
 })
 
 export default router;
