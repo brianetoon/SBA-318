@@ -1,10 +1,7 @@
-// const express = require("express");
-// const recipes = require("./routes/recipes");
-// const users = require("./routes/users");
-
 import express from "express";
-import recipes from "./routes/recipes.js";
-import users from "./routes/users.js";
+import recipes from "./routes/recipesRoutes.js";
+import users from "./routes/usersRoutes.js";
+import errorHandler from "./middleware/errorHandler.js";
 
 const app = express();
 const port = 3000;
@@ -22,9 +19,12 @@ app.get("/about", (req, res) => {
   res.send("This is the about page.");
 });
 
-// API Routes
+// API Routes Middleware
 app.use("/api/recipes", recipes);
 app.use("/api/users", users);
+
+// Error Handler Middleware
+app.use(errorHandler);
 
 // Start Server
 app.listen(port, () => {
