@@ -1,116 +1,19 @@
 import express from "express";
 const router = express.Router();
-
-import recipes from "../data/recipes.js";
-import users from "../data/users.js";
-import comments from "../data/comments.js";
-
 import {
-  findById,
-  findIndex,
-  generateId,
-  getComments,
-  getFormattedComments
-} from "../utilities/index.js";
+  createComment,
+  createRecipe,
+  deleteRecipe,
+  getAllRecipes,
+  getRecipeById,
+  updateRecipe
+} from "../controllers/recipesController.js";
 
-router.route("/")
-  // GET all recipes
-  .get((req, res, next) => {
-    console.log(`🚀 ${req.method} request for all recipes`);
-
-    try {
-      const recipesWithComments = recipes.map(recipe => {
-        const recipeComments = getComments(comments, recipe.id);
-        const formattedComments = getFormattedComments(recipeComments, users);
-        return { ...recipe, comments: formattedComments }
-      });
-      res.json({ success: true, data: recipesWithComments});
-
-    } catch (error) {
-      next(error);
-    }
-  })
-
-  // POST new recipe
-  .post((req, res) => {
-    console.log(`🚀 ${req.method} request for a new recipe`);
-
-    try {
-      const newRecipe = req.body;
-      newRecipe.id = generateId();
-      recipes.push(newRecipe);
-      res.status(201).json({ success: true, data: newRecipe });
-
-    } catch(error) {
-      next(error);
-    }
-  });
-
-router.route("/:id")
-  // GET specific recipe
-  .get((req, res) => {
-    console.log(`🚀 ${req.method} request for recipe ID: ${req.params.id}`);
-
-    const recipeId = parseInt(req.params.id);
-    const recipe = findById(recipes, recipeId);
-
-     if (!recipe) return next(new Error("Recipe not found"));
-
-    const recipeComments = getComments(comments, recipeId);
-    const formattedComments = getFormattedComments(recipeComments, users)
-
-    res.json({ success: true, data: { ...recipe, comments: formattedComments } });
-  })
-
-  // PATCH (update) specific recipe
-  .patch((req, res) => {
-    console.log(`🚀 ${req.method} request for recipe ID: ${req.params.id}`);
-
-    const recipeId = parseInt(req.params.id);
-    const recipe = findById(recipes, recipeId);
-
-    if (!recipe) return next(new Error("Recipe not found"));
-
-    Object.assign(recipe, req.body); 
-    res.json({ success: true, data: recipe });
-  })
-  
-  // DELETE specific recipe
-  .delete((req, res) => {
-    console.log(`🚀 ${req.method} request for recipe ID: ${req.params.id}`);
-
-    const recipeId = parseInt(req.params.id);
-    const recipeIndex = findIndex(recipes, recipeId)
-    if (recipeIndex === -1) return next(new Error("Recipe not found"));
-  
-    const deletedRecipe = recipes.splice(recipeIndex, 1)[0];
-    res.json({ success: true, data: deletedRecipe });
-  });
-
-
-router.route("/:id/comments")
-  // POST new comment to a recipe
-  .post((req, res) => {
-    const { userId, content } = req.body;
-
-    if (!content) return next(new Error("Comment was not provided"));
-    if (!userId) return next(new Error("User ID was not provided"));
-
-    const recipeId = parseInt(req.params.id);
-    const recipe = findById(recipes, recipeId);
-
-    if (!recipe) return next(new Error("Recipe not found"));
-
-    const newComment = {
-      id: generateId(), 
-      recipeId,
-      userId,
-      content,
-      timestamp: new Date().toISOString(),
-    };
-
-    comments.push(newComment);
-    res.status(201).json({ success: true, data: newComment });
-  });
+router.get("/", getAllRecipes);
+router.post("/", createRecipe);
+router.get("/:id", getRecipeById);
+router.patch("/:id", updateRecipe);
+router.delete("/:id", deleteRecipe);
+router.post("/:id/comments", createComment);
 
 export default router;
