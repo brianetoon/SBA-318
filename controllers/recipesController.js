@@ -42,7 +42,7 @@ export const createRecipe = (req, res, next) => {
     newRecipe.id = generateId();
     recipes.push(newRecipe);
     // res.status(201).json({ success: true, data: newRecipe });
-    res.redirect("/recipes")
+    res.redirect("/recipes");
 
   } catch(error) {
     next(error);
